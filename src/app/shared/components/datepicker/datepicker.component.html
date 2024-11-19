@@ -1,0 +1,50 @@
+<div class="tw-flex tw-flex-col tw-items-start tw-gap-y-2">
+  <!--Date Input label-->
+  @if (datLabel()) {
+    <label [attr.for]="datLabel()" class="tw-text-sm"
+      >{{ datLabel() }}
+      @if (isRequired()) {
+        <span class="tw-text-red-500">*</span>
+      }
+    </label>
+  }
+
+  <!--Prime ng Calendar -->
+  <div class="tw-relative tw-w-full">
+    <p-calendar
+      appendTo="body"
+      [disabled]="disabled()"
+      #calendar
+      [selectionMode]="selectionMode()"
+      readonlyInput
+      [maxDate]="max()"
+      [touchUI]="!(this.comm.isMobile() | async)"
+      [dateFormat]="selectionMode() === 'single' ? 'dd M, yy' : 'dd M'"
+      [ngModel]="
+        selectionMode() === 'single' ? dateSingleValue() : dateRangeValue()
+      "
+      (ngModelChange)="dateChange($event)"
+      [placeholder]="placeholder()"
+      styleClass="tw-w-full xl:tw-cursor-pointer "
+      [inputStyleClass]="styleClass()"
+      [showIcon]="false"
+      inputId="icondisplay"
+    />
+
+    <icon
+      [name]="selectionMode() === 'single' ? 'calendar' : 'chv-d'"
+      type="primary"
+      [addCls]="disabled() ? 'tw-opacity-30' : 'tw-text-slate-500'"
+      (click)="openCalendar()"
+      class="tw-absolute tw-right-0 tw-top-0 tw-flex tw-h-full tw-items-center tw-justify-center tw-pr-5 tw-text-lg"
+      [ngClass]="{ '!tw-pr-4 tw-text-white': selectionMode() === 'range' }"
+    ></icon>
+  </div>
+
+  <!--Validation-->
+  @if (isValid().cond1 && isValid().form_submit && validText() && !disabled()) {
+    <div class="tw-text-sm tw-text-red-500">
+      {{ validText() }}
+    </div>
+  }
+</div>

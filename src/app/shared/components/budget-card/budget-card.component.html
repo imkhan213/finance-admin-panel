@@ -1,0 +1,104 @@
+@defer (on timer(150ms)) {
+  <div
+    class="tw-flex tw-min-w-full tw-max-w-96 tw-flex-col tw-gap-y-4 tw-rounded-md tw-bg-white tw-p-4"
+    [ngClass]="addCls()"
+  >
+    <div
+      class="tw-flex tw-w-full tw-items-center tw-justify-between tw-gap-x-3"
+    >
+      <div class="tw-flex tw-flex-col tw-gap-y-1">
+        <span class="tw-text-lg tw-font-semibold">
+          {{ title() }}
+        </span>
+        <span class="tw-text-xs tw-font-medium tw-text-gray-400">
+          {{ filtDate()[0] | date: "dd MMM" }} -
+          {{ filtDate()[1] | date: "dd MMM" }},&nbsp;{{
+            filtDate()[1] | date: "yyyy"
+          }}
+        </span>
+      </div>
+
+      <div
+        class="tw-relative tw-flex tw-min-h-10 tw-min-w-10 tw-items-center tw-justify-center tw-rounded-md"
+        [ngClass]="{
+          'tw-bg-azure-100': title() === 'Remaining',
+          'tw-bg-green-100': title() === 'Income',
+          'tw-bg-red-100': title() === 'Expenses',
+        }"
+      >
+        <icon
+          [name]="
+            title() === 'Remaining'
+              ? 'bag'
+              : title() === 'Income'
+                ? 'grph-rise'
+                : 'grph-down'
+          "
+          class="tw-text-2xl"
+          [addCls]="
+            title() === 'Remaining'
+              ? '!tw-text-azure-600 !tw-cursor-auto'
+              : title() === 'Income'
+                ? '!tw-text-green-500 !tw-cursor-auto '
+                : '!tw-text-red-600 !tw-cursor-auto'
+          "
+        >
+        </icon>
+      </div>
+    </div>
+
+    <div class="*:tw-m-0">
+      <h3
+        class="tw-pointer-events-none tw-font-semibold"
+        [countUp]="amt()"
+        [options]="{ enableScrollSpy: false, duration: 2, prefix: '₹' }"
+      ></h3>
+      <p
+        class="tw-text-xs tw-font-medium"
+        [ngClass]="{
+          'tw-text-green-600': periodCompaPercent() > 0,
+          'tw-text-red-600': periodCompaPercent() < 0,
+        }"
+      >
+        @if (title() === "Expenses") {
+          {{ periodCompaPercent() < 0 ? "Spend" : "Saved" }}
+          {{ periodCompaPercent() + "% from last month" }}
+        } @else {
+          {{ periodCompaPercent() }}% from last month
+        }
+      </p>
+    </div>
+  </div>
+} @placeholder {
+  <div
+    class="tw-flex tw-min-h-[140px] tw-min-w-full tw-max-w-96 tw-flex-col tw-gap-y-4 tw-rounded-md tw-bg-white tw-p-4"
+  >
+    <div
+      class="tw-flex tw-w-full tw-items-center tw-justify-between tw-gap-x-3"
+    >
+      <div class="tw-flex tw-flex-col tw-gap-y-1">
+        <span
+          class="tw-h-7 tw-w-28 tw-animate-pulse tw-rounded-md tw-bg-gray-200 tw-text-lg tw-font-semibold"
+        >
+        </span>
+        <span
+          class="tw-h-4 tw-w-40 tw-animate-pulse tw-rounded-md tw-bg-gray-200 tw-text-xs tw-font-medium tw-text-gray-400"
+        >
+        </span>
+      </div>
+
+      <div
+        class="tw-min-h-10 tw-min-w-10 tw-animate-pulse tw-rounded-md tw-bg-gray-200"
+      ></div>
+    </div>
+
+    <div class="*:tw-m-0">
+      <h3
+        class="tw-min-h-6 tw-w-28 tw-animate-pulse tw-rounded-md tw-bg-gray-200"
+      ></h3>
+      <p
+        class="!tw-mt-1 tw-min-h-3 tw-w-40 tw-animate-pulse tw-rounded-md tw-bg-gray-200"
+      ></p>
+    </div>
+  </div>
+}

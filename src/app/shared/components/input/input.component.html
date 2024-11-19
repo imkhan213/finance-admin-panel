@@ -1,0 +1,85 @@
+<div class="tw-flex tw-flex-col tw-items-start tw-gap-y-2">
+  <!--Input label-->
+  @if (inpLabel()) {
+    <label [attr.for]="inpLabel()" class="tw-text-sm"
+      >{{ inpLabel() }}
+      @if (isRequired()) {
+        <span class="tw-text-red-500">*</span>
+      }
+    </label>
+  }
+
+  <!--Input-->
+  <div class="tw-relative tw-w-full">
+    <input
+      [attr.id]="inpLabel()"
+      [type]="eyeToggle() ? 'text' : type()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [readonly]="readonly()"
+      [attr.maxLength]="maxLength()"
+      autocomplete="on"
+      [ngModel]="inptValue()"
+      (ngModelChange)="onInputChange($event)"
+      (blur)="onBlur()"
+      [class]="addCls()"
+      class="tw-azure-indigo-600 tw-w-full tw-rounded-xl tw-border-2 tw-border-solid tw-border-stroke-100 tw-p-2 tw-px-4 tw-outline-none tw-ring-offset-2 tw-transition-all tw-duration-200 tw-ease-in focus:tw-border-azure-500 focus:tw-ring-2 focus:tw-ring-azure-200 xl:tw-cursor-pointer"
+      [ngClass]="{
+        'tw-pr-12 xl:tw-pr-14': icon().name,
+        'tw-pointer-events-none tw-border-none placeholder:tw-select-none':
+          disabled(),
+        'focus:tw-border-stroke-100 focus:tw-ring-0 focus:tw-ring-transparent':
+          readonly(),
+      }"
+    />
+
+    @if (icon().name && icon().type) {
+      <span
+        class="tw-absolute tw-right-0 tw-top-0 tw-flex tw-h-full tw-items-center tw-pr-5 tw-transition-all tw-duration-200 tw-ease-in"
+      >
+        @if (icon().name === "eye" && eyeToggle()) {
+          <icon
+            [name]="icon().name"
+            [type]="icon().type ?? 'primary'"
+            addCls="tw-mt-[0.3rem] tw-text-slate-500"
+            (click)="eyeToggle.set(false)"
+          ></icon>
+        } @else if (!eyeToggle()) {
+          <icon
+            name="eye-off"
+            [type]="icon().type ?? 'primary'"
+            addCls="tw-mt-[0.3rem] tw-text-slate-500"
+            (click)="eyeToggle.set(true)"
+          ></icon>
+        }
+
+        @if (icon().name !== "eye") {
+          <icon [name]="icon().name" [type]="icon().type ?? 'primary'"></icon>
+        }
+      </span>
+    }
+  </div>
+
+  <!--Validation-->
+  @if (
+    isValid().cond1 &&
+    validText() &&
+    isValid().form_submit &&
+    !disabled() &&
+    !readonly()
+  ) {
+    <div class="tw-text-sm tw-text-red-500">
+      {{ validText() }}
+    </div>
+  } @else if (
+    isValid().cond2 &&
+    isValid().form_submit &&
+    validText2() &&
+    !disabled() &&
+    !readonly()
+  ) {
+    <div class="tw-text-sm tw-text-red-500">
+      {{ validText2() }}
+    </div>
+  }
+</div>

@@ -1,0 +1,145 @@
+<!--Table Component-->
+<p-table
+  #table
+  [columns]="cols()"
+  [value]="data()"
+  [paginator]="true"
+  [rows]="rows()"
+  [first]="first()"
+  [rowHover]="true"
+  (onRowSelect)="selectCount.emit(table.selection.length)"
+  (onRowUnselect)="selectCount.emit(table.selection.length)"
+  (selectionChange)="selectCount.emit(table.selection.length)"
+>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th style="width: 4rem; padding-left: 1rem !important">
+        <p-tableHeaderCheckbox />
+      </th>
+      @for (col of columns; track col) {
+        <th [pSortableColumn]="col.field" class="max-sm:tw-cursor-auto">
+          <span
+            class="tw-text-nowrap tw-text-sm tw-font-medium tw-text-gray-500"
+          >
+            {{ col.header }}
+            @if (col.field !== "action") {
+              <p-sortIcon field="code" />
+            }
+          </span>
+        </th>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr class="max-sm:tw-cursor-auto">
+      <td>
+        <p-tableCheckbox [value]="rowData" />
+      </td>
+      @for (col of columns; track col) {
+        <td>
+          @if (col.field !== "action") {
+            <span
+              class="tw-select-none tw-text-nowrap tw-text-sm tw-font-medium tw-text-black tw-underline-offset-2 tw-transition-all tw-duration-300 tw-ease-in hover:tw-underline"
+              [ngClass]="{
+                '!tw-rounded-full tw-bg-azure-100 tw-px-3 tw-py-1.5 !tw-text-xs !tw-text-azure-500':
+                  col.field === 'amt' && rowData.amt > 0,
+                'tw-rounded-full !tw-bg-red-100 !tw-px-3 !tw-py-1.5 tw-text-xs !tw-text-red-500':
+                  col.field === 'amt' && rowData.amt < 0,
+              }"
+            >
+              @if (col.field === "amt" && rowData.amt > 0) {
+                ₹
+              } @else if (col.field === "amt" && rowData.amt < 0) {
+                -₹
+              }
+              {{
+                col.field !== "amt"
+                  ? rowData[col.field]
+                  : abs(rowData[col.field])
+              }}
+            </span>
+          } @else {
+            <icon
+              name="more"
+              class="tw-ml-3 tw-text-lg"
+              addCls="!tw-text-black"
+              (click)="menu.toggle($event)"
+            >
+            </icon>
+          }
+        </td>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="paginatorleft">
+    <span class="tw-text-sm">
+      Showing {{ table?.first ?? 0 + 1 }} to
+      {{
+        (table?.first ?? 0) + (table?.rows ?? 0) > (table?.totalRecords ?? 0)
+          ? (table?.totalRecords ?? 0)
+          : (table?.first ?? 0) + (table?.rows ?? 0)
+      }}
+      of {{ table?.totalRecords ?? 0 }} entries</span
+    >
+  </ng-template>
+  <ng-template pTemplate="paginatorright">
+    <div class="tw-flex tw-items-center tw-gap-x-3">
+      <btn
+        type="outline"
+        (click)="prev()"
+        [disabled]="first() === 0"
+        [class.tw-pointer-events-none]="first() === 0"
+      >
+        Previous</btn
+      >
+      <btn
+        type="outline"
+        (click)="next()"
+        [disabled]="
+          (table?.first ?? 0) + (table?.rows ?? 0) >= table.totalRecords
+        "
+        [class.tw-pointer-events-none]="
+          (table?.first ?? 0) + (table?.rows ?? 0) >= table.totalRecords
+        "
+        >Next</btn
+      >
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr class="tw-cursor-auto hover:!tw-bg-white">
+      <td class="tw-text-center" [attr.colspan]="cols().length + 1">
+        No transaction found.
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!--P-mat menu-->
+<div class="tw-static">
+  <p-menu #menu [model]="menuItems()" [popup]="true">
+    <ng-template pTemplate="item" let-item>
+      <div class="tw-rounded-md tw-bg-white">
+        <span
+          class="tw-flex tw-items-center tw-gap-x-2 tw-rounded-md tw-p-2 hover:tw-bg-gray-400/10 xl:tw-cursor-pointer"
+          (mouseenter)="lottieService.playAnimation(item.label)"
+          (mouseleave)="lottieService.stopAnimation(item.label)"
+          (click)="item.label === 'Delete' && deleteConfirm.emit(true)"
+        >
+          <div class="tw-h-6 tw-w-6 xl:tw-cursor-pointer">
+            <ng-lottie
+              [options]="item.label === 'Edit' ? options[0] : options[1]"
+              (animationCreated)="
+                lottieService.animationCreated(item.label, $event)
+              "
+            >
+            </ng-lottie>
+          </div>
+          <span class="tw-text-sm tw-font-medium">{{ item.label }}</span>
+        </span>
+      </div>
+    </ng-template>
+  </p-menu>
+</div>

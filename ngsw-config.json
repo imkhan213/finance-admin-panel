@@ -1,0 +1,59 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/*.css",
+          "/*.js",
+          "/index.html",
+          "/public/fonts/icons-fonts/**",
+          "/public/fonts/icons-fonts/*.{eot,svg,ttf,woff,woff2}",
+          "/media/*.woff2"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/public/**",
+          "/*.svg"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "urls": ["/api/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "1h",
+        "timeout": "30s"
+      }
+    },
+    {
+      "name": "fonts",
+      "urls": [
+        "/media/*.woff2"
+      ],
+      "cacheConfig": {
+        "maxSize": 50,
+        "maxAge": "30d",
+        "timeout": "60s",
+        "strategy": "performance"
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+@let isMobileView = this.comm.isMobile() | async;
+
+<div>
+  @if (!isMobileView) {
+    <div
+      class="tw-sticky tw-top-0 tw-z-40 tw-flex tw-h-14 tw-items-center tw-justify-between tw-bg-blue-600 tw-px-4 tw-py-2"
+    >
+      <div class="tw-flex tw-items-center tw-gap-x-20">
+        <h1 class="tw-text-2xl tw-font-medium tw-text-white">Finance</h1>
+      </div>
+
+      <div
+        class="tw-flex tw-h-9 tw-w-9 tw-items-center tw-justify-center"
+        (click)="isMenuOpen.set(true)"
+      >
+        <icon
+          name="menu"
+          addCls="tw-w-full !tw-text-2xl !tw-text-white tw-h-full"
+        ></icon>
+      </div>
+    </div>
+  }
+
+  <app-header></app-header>
+  <div
+    class="-tw-mt-20 tw-px-10 tw-py-4 max-md:tw-px-6 max-sm:-tw-mt-24 max-sm:tw-px-4"
+  >
+    <div class="tw-mx-auto tw-max-w-screen-2xl">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+@defer (when !(isMobileView)) {
+  @if (!isMobileView) {
+    <div
+      class="tw-fixed tw-top-0 tw-z-50 tw-h-dvh tw-w-full tw-touch-none tw-overflow-hidden tw-bg-black/20 tw-transition-all tw-duration-200 tw-ease-in"
+      [ngClass]="{ 'tw-visible': isMenuOpen, 'tw-invisible': !isMenuOpen() }"
+      (click)="isMenuOpen.set(false)"
+    >
+      <div
+        class="tw-ml-auto tw-h-full tw-w-60 tw-bg-white tw-px-4 tw-py-6 tw-transition-all tw-duration-300 tw-ease-in md:tw-w-80"
+        [ngClass]="{
+          'tw-fixed tw-right-0 -tw-translate-x-0': isMenuOpen(),
+          'tw-translate-x-96': !isMenuOpen(),
+        }"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="tw-flex tw-h-full tw-flex-col tw-gap-y-6">
+          <div
+            class="tw-ml-auto tw-flex tw-h-8 tw-w-8 tw-items-center tw-justify-center tw-rounded-full tw-bg-gray-100"
+            (click)="isMenuOpen.set(false)"
+          >
+            <icon name="close" addCls="!tw-text-xl !tw-text-black/70"></icon>
+          </div>
+
+          <div class="tw-flex tw-flex-col tw-items-start tw-gap-y-5">
+            @for (n of navList; track n) {
+              <div
+                class="tw-flex tw-w-full tw-items-center tw-gap-x-0.5 tw-rounded-md tw-px-2 tw-py-1 tw-text-base tw-text-black tw-transition-all tw-duration-300 tw-ease-in md:tw-text-base"
+                [ngClass]="{
+                  '!tw-bg-azure-50 !tw-text-azure-600': n.link === route.url,
+                }"
+                [routerLink]="n.link"
+                (click)="isMenuOpen.set(false)"
+              >
+                <icon
+                  [name]="n.icon"
+                  class="tw-pr-2"
+                  addCls="!tw-text-xl"
+                ></icon>
+                <span class="tw-font-medium">
+                  {{ n.name }}
+                </span>
+              </div>
+            }
+          </div>
+          <btn
+            type="solid"
+            class="tw-mt-auto"
+            addCls="tw-bg-red-400 !tw-border-red-300 !tw-ring-0 tw-cursor-auto"
+            (click)="auth.logout()"
+            >Logout
+          </btn>
+        </div>
+      </div>
+    </div>
+  }
+}

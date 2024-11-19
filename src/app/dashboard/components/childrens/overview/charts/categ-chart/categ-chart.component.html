@@ -1,0 +1,79 @@
+@defer (on timer(150ms)) {
+  <div
+    class="tw-flex tw-h-[524px] tw-w-full tw-flex-col tw-gap-y-8 tw-rounded-md tw-bg-white tw-p-4 max-md:tw-h-[470px]"
+  >
+    <div
+      class="tw-flex tw-w-full tw-items-center tw-justify-between tw-pr-3 max-md:tw-gap-y-3 max-sm:tw-flex-col max-sm:tw-items-start max-sm:tw-gap-y-4 max-sm:tw-pr-0 md:tw-flex-col md:tw-items-start md:tw-gap-y-3 xl:tw-flex-row"
+    >
+      <span class="tw-text-xl tw-font-semibold">Categories</span>
+      <dropdown
+        class="max-sm:tw-w-full"
+        addCls="max-sm:tw-w-full"
+        placeholder="Select type.."
+        [dropList]="dropItemList()"
+        [selectItem]="dropItemList()[0]"
+        type="stroke"
+        (dropListSelection)="chartSelection($event)"
+      >
+      </dropdown>
+    </div>
+
+    <div
+      class="tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-between tw-gap-y-6 max-sm:tw-gap-y-4"
+    >
+      <div
+        class="max-sm:tw-h-64 max-sm:tw-w-64 md:tw-h-44 md:tw-w-44 xl:tw-h-56 xl:tw-w-56"
+      >
+        <p-chart [type]="type()" [data]="data" [options]="options" />
+      </div>
+      <div
+        class="tw-flex tw-w-full tw-flex-col tw-flex-wrap tw-items-start tw-justify-center tw-gap-y-4 max-md:tw-flex-row max-md:tw-gap-x-5 max-sm:tw-flex-row max-sm:tw-gap-4"
+      >
+        @for (c of [0, 1, 2, 3]; track c) {
+          <div class="tw-flex tw-items-center tw-gap-x-2">
+            <span class="tw-h-2 tw-w-2 tw-rounded-full tw-bg-blue-500"></span>
+            <span class="tw-text-sm tw-text-gray-400"
+              >Rent <span class="tw-text-black">51%</span></span
+            >
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+} @placeholder {
+  <div
+    class="tw-flex tw-h-full tw-w-full tw-flex-col tw-gap-y-6 tw-rounded-md tw-bg-white tw-p-4"
+  >
+    <div
+      class="tw-flex tw-w-full tw-items-center tw-justify-between tw-pr-3 max-sm:tw-flex-col max-sm:tw-items-start max-sm:tw-gap-y-4 md:tw-flex-col md:tw-items-start md:tw-gap-y-3 xl:tw-flex-row"
+    >
+      <span
+        class="tw-h-9 tw-min-w-40 tw-animate-pulse tw-rounded-md tw-bg-gray-200"
+      ></span>
+      <div
+        class="tw-h-10 tw-min-w-44 tw-animate-pulse tw-rounded-md tw-bg-gray-200"
+      ></div>
+    </div>
+
+    <div
+      class="tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-between tw-gap-y-6"
+    >
+      <div
+        class="tw-flex tw-w-full tw-items-center tw-justify-center tw-rounded-md"
+      >
+        <div
+          class="tw-h-64 tw-w-64 tw-animate-pulse tw-rounded-full tw-bg-gray-200"
+        ></div>
+      </div>
+      <div
+        class="tw-flex tw-w-full tw-flex-col tw-flex-wrap tw-items-start tw-justify-center tw-gap-y-4"
+      >
+        @for (c of [0, 1, 2, 3]; track c) {
+          <div
+            class="tw-h-5 tw-w-full tw-animate-pulse tw-rounded-md tw-bg-gray-200"
+          ></div>
+        }
+      </div>
+    </div>
+  </div>
+}

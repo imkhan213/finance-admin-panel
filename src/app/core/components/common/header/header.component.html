@@ -1,0 +1,84 @@
+@let isMobileView = this.comm.isMobile() | async;
+
+<div
+  class="tw-h-80 tw-w-full tw-bg-blue-600 tw-px-10 tw-py-4 max-md:tw-px-6 max-md:tw-py-2 max-sm:tw-h-96 max-sm:tw-px-4"
+>
+  <div class="tw-mx-auto tw-h-full tw-w-full tw-max-w-screen-2xl">
+    @if (isMobileView) {
+      <div class="tw-flex tw-items-center tw-justify-between">
+        <div class="tw-flex tw-items-center tw-gap-x-20">
+          <h1 class="tw-text-2xl tw-font-medium tw-text-white">Finance</h1>
+          @if (isMobileView) {
+            <div class="tw-flex tw-items-center tw-gap-x-6">
+              @for (n of navList; track n) {
+                <btn
+                  [routerLink]="n.link"
+                  type="light"
+                  [active]="n.isSelect"
+                  (click)="setActiveButton(n.name)"
+                  >{{ n.name }}</btn
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="tw-flex tw-items-center tw-justify-end">
+          <avatar label="deepesh solanki" [isPopUp]="true"></avatar>
+        </div>
+      </div>
+    }
+
+    <div class="tw-mt-8 tw-flex tw-flex-col tw-gap-y-3">
+      <div class="tw-flex tw-flex-col tw-gap-y-1">
+        <div
+          class="tw-m-0 tw-flex tw-items-center tw-gap-x-3 max-sm:tw-items-start"
+        >
+          <h1
+            class="tw-m-0 tw-line-clamp-2 tw-text-2xl tw-font-medium tw-text-white"
+          >
+            Welcome Back, deepesh
+          </h1>
+          <div class="tw-relative tw-min-h-8 tw-min-w-8">
+            <img
+              ngSrc="images/dashboard-img/waving-hand.webp"
+              fill
+              decoding="async"
+              draggable="false"
+              class="tw-h-full tw-w-full"
+              alt="hand img"
+            />
+          </div>
+        </div>
+        <p class="tw-m-0 tw-text-sm tw-font-normal tw-text-azure-50/60">
+          This is your Financial Overview Report
+        </p>
+      </div>
+
+      <div
+        class="tw-flex tw-items-center tw-gap-x-3 max-sm:tw-flex-col max-sm:tw-items-start max-sm:tw-gap-y-3"
+      >
+        <dropdown
+          placeholder="Select.."
+          class="max-sm:tw-w-full"
+          addCls="max-sm:tw-w-full"
+          [dropList]="dropItemList()"
+          [selectItem]="dropItemList()[0]"
+        >
+        </dropdown>
+        @defer (on idle) {
+          <datepicker
+            selectionMode="range"
+            class="max-sm:tw-w-full"
+            addCls="max-sm:tw-w-full"
+            placeholder="Select date range"
+          ></datepicker>
+        } @placeholder {
+          <div
+            class="tw-min-h-10 tw-min-w-48 tw-animate-pulse tw-rounded-md tw-bg-azure-200/50 max-sm:tw-w-full"
+          ></div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+@defer (on timer(150ms)) {
+  <div
+    class="tw-flex tw-h-full tw-w-full tw-flex-col tw-gap-y-6 tw-rounded-md tw-bg-white tw-p-4"
+  >
+    <div class="tw-flex tw-w-full tw-items-center tw-justify-between">
+      <span class="tw-text-xl tw-font-semibold">Settings</span>
+    </div>
+
+    <div
+      class="tw-flex tw-w-full tw-items-center tw-justify-between tw-rounded-lg tw-border tw-border-solid tw-border-gray-200 tw-p-3 max-sm:tw-flex-col max-sm:tw-items-end max-sm:tw-gap-y-4"
+    >
+      <div class="tw-flex tw-items-center tw-gap-x-3 max-sm:tw-w-full">
+        <avatar label="deepesh solanki" size="large"></avatar>
+        <span>
+          <h4 class="tw-m-0 tw-line-clamp-1 tw-font-semibold">
+            deepesh solanki
+          </h4>
+          <p
+            class="tw-m-0 tw-line-clamp-1 tw-pt-0.5 tw-text-xs tw-text-gray-400"
+          >
+            deepeshsolanki4444&#64;gmail.com
+          </p>
+        </span>
+      </div>
+
+      <div
+        class="tw-flex tw-items-center tw-gap-x-2 tw-rounded-md tw-px-3 tw-py-1 tw-text-red-500 tw-transition-all tw-duration-300 tw-ease-in hover:tw-bg-red-100/50 xl:tw-cursor-pointer"
+        (click)="auth.logout()"
+      >
+        <icon name="logout" addCls="!tw-font-bold !tw-text-lg"></icon>
+        <p
+          class="tw-m-0 tw-select-none tw-text-base tw-font-medium max-sm:tw-text-sm"
+        >
+          Logout
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="tw-flex tw-w-full tw-flex-col tw-items-start tw-justify-between tw-gap-y-5 tw-rounded-lg tw-border tw-border-solid tw-border-gray-200 tw-p-4"
+    >
+      <span
+        class="tw-flex tw-w-full tw-items-center tw-justify-between max-sm:tw-items-start"
+      >
+        <h4 class="tw-m-0 tw-text-lg tw-font-semibold">Personal information</h4>
+        <!-- <p class="tw-m-0 tw-text-sm tw-text-gray-400">deepeshsolanki4444&#64;gmail.com</p> -->
+        <btn
+          type="outline"
+          addCls="!tw-px-3"
+          (mouseenter)="lottieService.playAnimation('Edit')"
+          (mouseleave)="lottieService.stopAnimation('Edit')"
+          (click)="isEdit.set(!isEdit())"
+        >
+          <div class="tw-flex tw-items-center tw-gap-x-1.5">
+            <div class="tw-h-5 tw-w-5 xl:tw-cursor-pointer">
+              <ng-lottie
+                [options]="isEdit() ? options[1] : options[0]"
+                (animationCreated)="
+                  lottieService.animationCreated('Edit', $event)
+                "
+              >
+              </ng-lottie>
+            </div>
+            <span class="tw-font-medium">{{ isEdit() ? "Save" : "Edit" }}</span>
+          </div>
+        </btn>
+      </span>
+
+      <div
+        class="tw-grid tw-w-full tw-grid-cols-4 tw-gap-x-6 max-sm:tw-grid-cols-1 max-sm:tw-gap-y-4"
+      >
+        <div class="tw-col-span-1">
+          <h2
+            class="tw-m-0 tw-pb-0.5 tw-text-base tw-font-normal tw-text-gray-400"
+          >
+            First name
+          </h2>
+          @if (isEdit()) {
+            <app-input placeholder="Enter first name"></app-input>
+          } @else {
+            <p
+              class="tw-m-0 tw-truncate tw-pt-0.5 tw-text-sm tw-font-medium tw-text-black/80"
+            >
+              deepesh solanki
+            </p>
+          }
+        </div>
+        <div class="tw-col-span-1">
+          <h2
+            class="tw-m-0 tw-pb-0.5 tw-text-base tw-font-normal tw-text-gray-400"
+          >
+            Date of birth
+          </h2>
+          @if (isEdit()) {
+            <datepicker placeholder="Enter date of birth"></datepicker>
+          } @else {
+            <p
+              class="tw-m-0 tw-truncate tw-text-sm tw-font-medium tw-text-black/80"
+            >
+              13 Sep, 2003
+            </p>
+          }
+        </div>
+        <div class="tw-col-span-1">
+          <h2
+            class="tw-m-0 tw-pb-0.5 tw-text-base tw-font-normal tw-text-gray-400"
+          >
+            Email
+          </h2>
+          @if (isEdit()) {
+            <app-input placeholder="Enter email address"></app-input>
+          } @else {
+            <p
+              class="tw-m-0 tw-truncate tw-text-sm tw-font-medium tw-text-black/80"
+            >
+              deepesh&#64;gmail.com
+            </p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+} @placeholder {
+  <div
+    class="tw-flex tw-h-full tw-w-full tw-flex-col tw-gap-y-6 tw-rounded-md tw-bg-white tw-p-4"
+  >
+    <div class="tw-flex tw-w-full tw-items-center tw-justify-between">
+      <span
+        class="tw-h-9 tw-min-w-52 tw-animate-pulse tw-rounded-md tw-bg-gray-200"
+      ></span>
+    </div>
+
+    <div class="tw-flex tw-flex-col tw-gap-y-4">
+      <div
+        class="tw-flex tw-h-[72px] tw-w-full tw-animate-pulse tw-items-center tw-justify-between tw-rounded-md tw-bg-gray-200 tw-p-3 max-sm:tw-h-[125px]"
+      ></div>
+
+      <div
+        class="tw-min-h-[137px] tw-min-w-full tw-animate-pulse tw-rounded-md tw-bg-gray-200 max-sm:tw-h-72"
+      ></div>
+    </div>
+  </div>
+}
