@@ -1,0 +1,176 @@
+<div class="tw-grid tw-h-full tw-w-full tw-grid-cols-1 xl:tw-grid-cols-2">
+  <form
+    class="tw-col-span-1 tw-flex tw-h-full tw-flex-col tw-gap-y-4 tw-overflow-auto tw-bg-white tw-p-3 md:tw-gap-y-5 xl:tw-gap-y-2 xl:tw-overflow-hidden xl:tw-p-5"
+    [formGroup]="frm"
+  >
+    <div class="xl:tw-cursor-pointer">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="56"
+        height="40"
+        fill="none"
+        viewBox="0 0 82 40"
+      >
+        <path
+          fill="#FFD43D"
+          d="M73.365 19.71c0 2.904-2.241 5.31-5.27 5.31-3.03 0-5.228-2.406-5.228-5.31 0-2.905 2.199-5.312 5.228-5.312s5.27 2.407 5.27 5.311Z"
+        ></path>
+        <path
+          fill="#FF0C81"
+          d="M48.764 19.544c0 2.946-2.323 5.145-5.27 5.145-2.904 0-5.227-2.2-5.227-5.145 0-2.947 2.323-5.104 5.228-5.104 2.946 0 5.27 2.158 5.27 5.104Z"
+        ></path>
+        <path
+          fill="#11EEFC"
+          d="M20.074 25.02c3.029 0 5.27-2.406 5.27-5.31 0-2.905-2.241-5.312-5.27-5.312-3.03 0-5.228 2.407-5.228 5.311 0 2.905 2.199 5.312 5.228 5.312Z"
+        ></path>
+        <path
+          fill="#171A26"
+          d="M68.095 30.54c-6.307 0-11.12-4.897-11.12-10.872 0-5.934 4.855-10.83 11.12-10.83 6.349 0 11.162 4.938 11.162 10.83 0 5.975-4.855 10.871-11.162 10.871Zm0-5.52c3.03 0 5.27-2.406 5.27-5.31 0-2.905-2.24-5.312-5.27-5.312-3.029 0-5.228 2.407-5.228 5.311 0 2.905 2.199 5.312 5.228 5.312ZM43.08 40c-4.813 0-8.506-2.116-10.373-5.934l4.896-2.655c.913 1.784 2.614 3.195 5.394 3.195 3.486 0 5.85-2.448 5.85-6.473v-.374c-1.12 1.411-3.111 2.49-6.016 2.49-5.768 0-10.373-4.481-10.373-10.581 0-5.934 4.813-10.788 11.12-10.788 6.431 0 11.162 4.605 11.162 10.788v8.299C54.74 35.27 49.76 40 43.08 40Zm.415-15.311c2.946 0 5.27-2.2 5.27-5.145 0-2.947-2.324-5.104-5.27-5.104-2.905 0-5.228 2.158-5.228 5.104s2.323 5.145 5.228 5.145ZM20.074 30.54c-6.307 0-11.12-4.897-11.12-10.872 0-5.934 4.854-10.83 11.12-10.83 6.348 0 11.162 4.938 11.162 10.83 0 5.975-4.855 10.871-11.162 10.871Zm0-5.52c3.029 0 5.27-2.406 5.27-5.31 0-2.905-2.241-5.312-5.27-5.312-3.03 0-5.228 2.407-5.228 5.311 0 2.905 2.199 5.312 5.228 5.312ZM0 0h5.892v30H0V0ZM82 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
+        ></path>
+      </svg>
+    </div>
+
+    <div
+      class="tw-flex tw-h-auto tw-flex-col tw-justify-start tw-gap-y-5 tw-p-1 max-md:tw-mb-12 max-sm:tw-mb-4 md:tw-mx-auto md:tw-min-w-[32rem] xl:tw-mx-auto xl:tw-h-[calc(100%_-_46px)] xl:tw-min-w-[600px] xl:tw-gap-y-6 xl:tw-overflow-auto xl:tw-p-16"
+    >
+      <div>
+        <h3 class="tw-m-0 tw-text-2xl tw-font-normal">Create a new account</h3>
+        <p class="tw-m-0 tw-mt-0.5 tw-text-xs tw-font-medium tw-text-slate-700">
+          Enter your credientials to register
+        </p>
+      </div>
+
+      <div
+        class="tw-group tw-flex tw-h-10 tw-w-full tw-items-center tw-justify-center tw-gap-x-2 tw-rounded-xl tw-border tw-border-solid tw-border-stroke-100 tw-ring-offset-2 tw-transition-all tw-duration-300 tw-ease-in hover:tw-bg-azure-600 hover:tw-ring-2 hover:tw-ring-azure-300 xl:tw-cursor-pointer"
+      >
+        <picture class="tw-relative tw-block tw-h-10 tw-w-10">
+          <img
+            ngSrc="/icons/google.webp"
+            decoding="async"
+            draggable="false"
+            fill
+            class="tw-h-full tw-w-full"
+            alt="google img"
+          />
+        </picture>
+        <p
+          class="tw-select-none tw-text-sm tw-font-medium tw-text-slate-800 tw-transition-all tw-duration-300 tw-ease-in group-hover:tw-text-white"
+        >
+          Log in with Google
+        </p>
+      </div>
+
+      <div class="tw-flex tw-w-full tw-items-center tw-gap-x-2">
+        <span
+          class="tw-mt-1 tw-h-1 tw-w-full tw-border-b-0 tw-border-l-0 tw-border-r-0 tw-border-t tw-border-solid tw-border-gray-300"
+        ></span>
+        <span class="min-w-12 tw-text-sm tw-text-slate-500">or</span>
+        <span
+          class="tw-mt-1 tw-h-1 tw-w-full tw-border-b-0 tw-border-l-0 tw-border-r-0 tw-border-t tw-border-solid tw-border-gray-300"
+        ></span>
+      </div>
+
+      <app-input
+        formControlName="cName"
+        inpLabel="Name"
+        [isRequired]="true"
+        class="tw-col-span-1"
+        [maxLength]="80"
+        placeholder="Enter your fullname"
+        [isValid]="{
+          cond1: frm.get('cName')?.hasError('required') ?? false,
+          cond2: frm.get('cName')?.hasError('pattern') ?? false,
+          form_submit: this.form_submit(),
+        }"
+        validText="Enter your fullname"
+      ></app-input>
+
+      <datepicker
+        datLabel="Date of birth"
+        [isRequired]="true"
+        (date)="frm.get('dDob')?.setValue($event)"
+        validText="Enter your date of birth"
+        placeholder="Enter your date of birth"
+        [isValid]="{
+          cond1: frm.get('dDob')?.hasError('required') ?? false,
+          form_submit: form_submit(),
+        }"
+      ></datepicker>
+
+      <app-input
+        formControlName="cEmail"
+        inpLabel="Email"
+        [isRequired]="true"
+        class="tw-col-span-1"
+        [maxLength]="80"
+        placeholder="Enter your email address"
+        [isValid]="{
+          cond1: frm.get('cEmail')?.hasError('required') ?? false,
+          cond2: frm.get('cEmail')?.hasError('pattern') ?? false,
+          form_submit: this.form_submit(),
+        }"
+        validText="Enter your email address"
+        validText2="Enter a valid email"
+      ></app-input>
+
+      <app-input
+        formControlName="cPass"
+        inpLabel="Password"
+        [isRequired]="true"
+        type="password"
+        class="tw-col-span-1"
+        placeholder="Enter your password"
+        [icon]="{ name: 'eye', type: 'primary' }"
+        [isValid]="{
+          cond1: frm.get('cPass')?.hasError('required') ?? false,
+          form_submit: this.form_submit(),
+        }"
+        validText="Enter your password"
+      ></app-input>
+
+      <p-checkbox
+        [binary]="true"
+        inputId="binary"
+        [labelStyleClass]="
+          !checked() && form_submit()
+            ? 'tw-text-red-500 xl:tw-cursor-pointer tw-text-sm tw-select-none'
+            : 'xl:tw-cursor-pointer tw-text-sm tw-select-none'
+        "
+        label="I agree to Terms & privacy"
+        [ngModel]="checked()"
+        (ngModelChange)="checked.set($event)"
+        [ngModelOptions]="{ standalone: true }"
+      >
+      </p-checkbox>
+
+      <btn #btn type="solid" (click)="!btn.disabled() && submit()">Sign up</btn>
+
+      <p class="tw-m-0 tw-select-none tw-text-sm">
+        Already have an account ?
+        <span
+          class="tw-font-medium tw-text-azure-600 tw-outline-none xl:tw-cursor-pointer"
+          routerLink="/auth/signin"
+          >Sign In</span
+        >
+      </p>
+    </div>
+  </form>
+
+  @if (this.comm.isMobile() | async) {
+    <div
+      class="tw-col-span-1 tw-m-4 tw-hidden tw-h-[calc(100%_-_35px)] tw-overflow-hidden tw-rounded-2xl tw-bg-[#314AE3] xl:tw-inline-block"
+    >
+      <div class="tw-relative tw-mx-auto tw-block tw-h-full">
+        <img
+          ngSrc="/images/login.webp"
+          draggable="false"
+          decoding="async"
+          fill
+          priority
+          alt="signup image"
+          class="tw-object-contain"
+        />
+      </div>
+    </div>
+  }
+</div>

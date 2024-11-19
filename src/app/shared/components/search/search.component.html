@@ -1,0 +1,20 @@
+<div class="max-w-sm">
+  <div class="tw-relative">
+    <div class="tw-relative">
+      <div
+        class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-start-0 tw-flex tw-items-center tw-ps-3.5"
+      >
+        <icon name="search" addCls="tw-text-stroke-100"></icon>
+      </div>
+      <input
+        class="tw-block tw-h-9 tw-w-full tw-max-w-56 tw-rounded-lg tw-border-2 tw-border-solid tw-border-gray-200/60 tw-p-2 tw-px-4 tw-py-1 tw-pe-4 tw-ps-10 tw-text-sm tw-outline-none tw-ring-offset-1 tw-transition-all tw-duration-200 tw-ease-in placeholder:tw-text-sm placeholder:tw-text-gray-500 focus:tw-border-azure-500 focus:tw-ring-2 focus:tw-ring-azure-200 disabled:tw-pointer-events-none disabled:tw-opacity-50 xl:tw-cursor-pointer"
+        type="text"
+        role="combobox"
+        aria-expanded="false"
+        [ngClass]="addInpClass()"
+        [placeholder]="placeholder()"
+        [maxLength]="maxlength()"
+      />
+    </div>
+  </div>
+</div>

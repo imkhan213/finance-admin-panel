@@ -1,0 +1,80 @@
+@defer (on timer(150ms); when type() === 'stroke') {
+  <p-dropdown
+    #dropdown
+    [options]="dropList()"
+    [ngModel]="selectedItemModel()"
+    (ngModelChange)="selcChng($event)"
+    optionLabel="name"
+    [placeholder]="placeholder()"
+    [styleClass]="styleClass()"
+    [virtualScroll]="true"
+    [virtualScrollItemSize]="38"
+    [filter]="filter()"
+    filterBy="name"
+    [ngStyle]="{
+      '--pIconColor': this.type() === 'solid' ? 'white' : 'lightgray',
+    }"
+  >
+    <!--Template for filter-->
+    <ng-template pTemplate="filter" let-options="options">
+      <div class="tw-flex tw-gap-1">
+        <div class="p-inputgroup" (click)="$event.stopPropagation()">
+          <span class="p-inputgroup-addon !tw-p-1">
+            <icon name="search"></icon>
+          </span>
+          <input
+            type="text"
+            [maxLength]="25"
+            class="tw-w-full tw-border tw-border-solid tw-border-gray-300 tw-px-3 tw-text-sm tw-outline-none"
+            placeholder="Search to add new"
+            [ngModel]="typeValue()"
+            (ngModelChange)="typeValue.set($event)"
+            (keyup)="customFilterFunction($event, options)"
+          />
+        </div>
+      </div>
+    </ng-template>
+
+    <!--Template for item-->
+    <ng-template let-item pTemplate="item">
+      <div class="tw-flex tw-items-center tw-gap-x-3">
+        @if (item.icon) {
+          <icon [name]="item.icon"></icon>
+        }
+        <span>{{ item.name }}</span>
+      </div>
+    </ng-template>
+
+    <!-- Template for selected item -->
+    <ng-template let-item pTemplate="selectedItem">
+      <div class="tw-flex tw-items-center tw-gap-x-2 !tw-text-sm">
+        @if (item.icon) {
+          <icon [name]="item.icon" addCls="!tw-text-black !tw-text-base"></icon>
+        }
+        <span
+          [ngClass]="type() === 'solid' ? 'tw-text-white' : 'tw-text-black'"
+          >{{ item.name }}</span
+        >
+      </div>
+    </ng-template>
+
+    <!--Template for empty filter-->
+    <ng-template pTemplate="emptyfilter">
+      <div
+        class="p-dropdown-empty-message !tw-p-0"
+        (click)="onDropdownClick($event)"
+      >
+        {{ "Add new " + typeValue() }}
+      </div>
+    </ng-template>
+  </p-dropdown>
+} @placeholder {
+  <div
+    class="tw-h-10 tw-animate-pulse tw-rounded-md"
+    [ngClass]="
+      type() === 'solid'
+        ? 'tw-min-w-40 tw-bg-azure-50/50'
+        : 'tw-min-w-44 tw-bg-gray-100'
+    "
+  ></div>
+}

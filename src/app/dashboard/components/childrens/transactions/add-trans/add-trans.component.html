@@ -1,0 +1,102 @@
+<div class="tw-mt-3 tw-flex tw-flex-col tw-gap-y-4">
+  <div class="tw-flex tw-flex-col tw-gap-y-2">
+    <label class="tw-px-0.5 tw-text-sm tw-font-medium">Pick a date</label>
+    <datepicker
+      addCls="!tw-rounded-md tw-h-10 !tw-border-gray-200 focus:!tw-border-azure-500"
+      placeholder="Pick a date.."
+    ></datepicker>
+  </div>
+
+  <div class="tw-flex tw-flex-col tw-gap-y-2">
+    <label class="tw-px-0.5 tw-text-sm tw-font-medium">Account</label>
+    <dropdown
+      addCls="tw-w-full focus-within:!tw-ring-2 focus-within:!tw-ring-azure-200 focus-within:!tw-ring-offset-2 focus-within:!tw-border-azure-500 focus-within:!tw-border-2 focus-within:!tw-border-solid focus-within:hover:!tw-border-azure-500"
+      type="stroke"
+      placeholder="Select an account"
+      [dropList]="dropItemList()"
+      [filter]="true"
+    >
+    </dropdown>
+  </div>
+
+  <div class="tw-flex tw-flex-col tw-gap-y-2">
+    <label class="tw-px-0.5 tw-text-sm tw-font-medium">Category</label>
+    <dropdown
+      addCls="tw-w-full focus-within:!tw-ring-2 focus-within:!tw-ring-azure-200 focus-within:!tw-ring-offset-2 focus-within:!tw-border-azure-500 focus-within:!tw-border-2 focus-within:!tw-border-solid focus-within:hover:!tw-border-azure-500"
+      type="stroke"
+      placeholder="Select a category"
+      [dropList]="dropItemList()"
+      [filter]="true"
+    >
+    </dropdown>
+  </div>
+
+  <div class="tw-flex tw-flex-col tw-gap-y-2">
+    <label class="tw-px-0.5 tw-text-sm tw-font-medium">Payee</label>
+    <app-input
+      addCls="!tw-rounded-md !tw-border-gray-200 focus:!tw-border-azure-500"
+      placeholder="Enter payee..."
+    ></app-input>
+  </div>
+
+  <div class="tw-flex tw-w-full tw-flex-col tw-gap-y-2">
+    <label class="tw-px-0.5 tw-text-sm tw-font-medium">Amount</label>
+    <div class="tw-relative !tw-w-full">
+      <p-inputNumber
+        placeholder="0.00"
+        inputId="integeronly"
+        maxlength="14"
+        [ngModel]="amount()"
+        (ngModelChange)="amount.set($event)"
+        [inputStyleClass]="numberInputClass"
+        styleClass="!tw-w-full"
+        class="tw-w-full"
+        mode="currency"
+        currency="INR"
+        locale="en-IN"
+        [minFractionDigits]="0"
+        [maxFractionDigits]="0"
+        [useGrouping]="true"
+      />
+      <div
+        class="tw-absolute tw-left-6 tw-top-1/2 tw-flex tw-h-7 tw-w-7 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-items-center tw-justify-center tw-rounded-md tw-outline-none xl:tw-cursor-pointer"
+        [pTooltip]="
+          amount() > 0
+            ? 'This will count as income'
+            : amount() < 0
+              ? 'This will count as expense'
+              : ''
+        "
+        tooltipPosition="bottom"
+        [ngClass]="{
+          'tw-bg-green-500': amount() > 0,
+          'tw-bg-red-500': amount() < 0,
+          'tw-bg-gray-300': amount() == 0 || amount() == null,
+        }"
+        (click)="
+          amount() > 0
+            ? amount.set(-amount())
+            : amount() < 0
+              ? amount.set(-amount())
+              : 0
+        "
+      >
+        <icon
+          [name]="amount() > 0 ? 'plus' : amount() < 0 ? 'minus' : 'info'"
+          addCls="!tw-text-white"
+        ></icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw-flex tw-flex-col tw-gap-y-2">
+    <label class="tw-px-0.5 tw-text-sm tw-font-medium">Notes</label>
+    <textarea
+      class="tw-h-24 tw-w-full tw-resize-none tw-rounded-md tw-border-2 tw-border-gray-200 tw-px-4 tw-py-2 tw-outline-none tw-transition-all tw-duration-200 tw-ease-in focus-within:!tw-border-azure-500 focus-within:tw-ring-2 focus-within:tw-ring-azure-200 focus-within:tw-ring-offset-2"
+      placeholder="Optional notes"
+      maxlength="200"
+    ></textarea>
+  </div>
+
+  <btn (click)="openSuccess()">Add a transaction</btn>
+</div>

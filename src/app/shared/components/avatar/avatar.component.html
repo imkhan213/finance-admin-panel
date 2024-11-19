@@ -1,0 +1,38 @@
+<!--Avatar-->
+
+<div
+  [ngClass]="{
+    'tw-size-8 tw-text-sm': size() === 'small',
+    'tw-size-10 tw-text-base': size() === 'medium',
+    'tw-size-12 tw-text-lg': size() === 'large',
+  }"
+  (click)="isPopUp() && op.toggle($event)"
+  class="tw-flex tw-select-none tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-solid tw-border-white tw-font-medium tw-text-white xl:tw-cursor-pointer"
+  [style.backgroundColor]="backgroundColor()"
+>
+  {{ initialName() }}
+</div>
+
+<!--Menu-->
+<p-overlayPanel #op>
+  <div
+    class="tw-border-b tw-border-l-0 tw-border-r-0 tw-border-t-0 tw-border-solid tw-border-gray-300 tw-pb-2"
+  >
+    <span
+      class="tw-line-clamp-1 tw-max-w-96 tw-text-sm tw-font-medium tw-text-black/80"
+      >deepesh solanki</span
+    >
+    <div
+      class="tw-line-clamp-2 tw-max-w-96 tw-text-xs tw-font-light tw-text-gray-400"
+    >
+      deepesh&#64;gmail.com
+    </div>
+  </div>
+  <div
+    class="tw-mt-2 tw-flex tw-items-center tw-gap-x-2 tw-rounded-md tw-py-1 tw-text-red-500 tw-transition-all tw-duration-200 tw-ease-in hover:tw-bg-red-50 hover:tw-pl-2 xl:tw-cursor-pointer"
+    (click)="auth.logout()"
+  >
+    <icon name="logout" addCls="!tw-font-bold !tw-text-lg"></icon>
+    <p class="tw-m-0 tw-select-none tw-text-xs tw-font-medium">Logout</p>
+  </div>
+</p-overlayPanel>
